@@ -1,0 +1,169 @@
+body {
+    background-color: #FFF;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.container1 {
+    display: inline-block;
+    width: 1000px;
+    height: 200px;
+    position: relative;
+}
+
+.container {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.nav {
+    padding-right: 6rem;
+    text-align: left;
+}
+
+.nav__link {
+    display: inline;
+    font-size: 3rem;
+    padding-left: 1.5rem;
+}
+
+.nav__link a {
+    text-decoration: none;
+    color: #D6FFF5;
+}
+
+.nav__link--active {
+    color: #001534;
+}
+
+.nav__link a:hover {
+    color: #fff;
+}
+
+.header {
+    background-color: rgb(131, 128, 128);
+}
+
+#Best {
+    margin-top: 20px;
+}
+
+#Bests,
+#Comedy,
+#History,
+#Biography {
+    display: block;
+    width: 1400px;
+    height: 200px;
+    position: relative;
+}
+
+#carrousel {
+    display: block;
+    width: 1000px;
+    height: 200px;
+    position: relative;
+}
+
+#films {
+    margin-left: 100px;
+    width: 800px;
+    height: 200px;
+    overflow: hidden;
+    border: solid 2px #000;
+
+}
+
+.button {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    cursor: pointer;
+    top: 60px;
+    right: 0x;
+}
+
+#g_Bests,
+#g_Comedy,
+#g_History,
+#g_Biography {
+    left: 0;
+    opacity: 0.3;
+    transform: rotate(180deg);
+    transition: all
+}
+
+#d_Bests,
+#d_Comedy,
+#d_History,
+#d_Biography {
+    right: 0;
+    opacity: 0.3;
+    transform: rotate(0deg);
+}
+
+#g_Bests:hover,
+#g_Comedy:hover,
+#g_History:hover,
+#g_Biography:hover {
+    transform: rotate(180deg) scale(1.1);
+    opacity: 0.6;
+}
+
+#d_Bests:hover,
+#d_Comedy:hover,
+#d_History:hover,
+#d_Biography:hover {
+    transform: rotate(0deg) scale(1.1);
+    opacity: 0.6;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 10px;
+    /* Location of the box */
+    left: 25%;
+    top: 25%;
+    width: 50%;
+    /* Full width */
+    height: 60%;
+    /* Full height */
+    overflow: hidden;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0);
+    /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    font-size: 28px;
+    font-weight: bold;
+    right: 0;
+
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
