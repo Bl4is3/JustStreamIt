@@ -1,7 +1,7 @@
 const url = "http://localhost:8000/api/v1/titles/";
 const urlbestfilm = url + '?sort_by=-imdb_score&page_size=7';
 const urlcomedy = url + "?genre=comedy&sort_by=-imdb_score&page_size=7";
-const urlfantastic = url + "?genre=History&sort_by=-imdb_score&page_size=7";
+const urlhistory = url + "?genre=history&sort_by=-imdb_score&page_size=7";
 const urlbiography = url + "?genre=biography&sort_by=-imdb_score&page_size=7";
 
 
@@ -16,7 +16,7 @@ let categories = new Map();
 
 categories.set('Bests', urlbestfilm);
 categories.set('Comedy', urlcomedy);
-categories.set('History', urlfantastic);
+categories.set('History', urlhistory);
 categories.set('Biography', urlbiography);
 
 let promise = fetch("http://localhost:8000/api/v1/titles/574", {
@@ -27,6 +27,7 @@ function createModale(key) {
     url_film = url + key.toString();
     console.log(url_film);
     return fetch(url_film)
+        // interrogation de l'api pour l'id souhaité
         .then((resp) => resp.json())
         .then(function (movie) {
             let modale = document.querySelector(".modal");
@@ -36,15 +37,40 @@ function createModale(key) {
             img.height = "400";
             img.width = '400';
             modale.style.display = "block";
-            let text_modal = createNode('p');
-            text.textContent += `Titre: ${movie.title} ` + '\n';
-            text.textContent += `Genres: ${movie.genres} \n`;
-            text.textContent += `Date de sortie: ${movie.year} \n`;
-            text.textContent += `Votes: ${movie.votes} \n`;
-            text.textContent += `Score Imdb: ${movie.imdb_score} \n`;
-            text.textContent += `Réalisateur: ${movie.directors} ` + '\n';
+            let titre = createNode('p');
+            titre.textContent = `Title: ${movie.title}`;
+            let genres = createNode('p');
+            genres.textContent += `Genre: ${movie.genres}`;
+            let date_published = createNode('p');
+            date_published.textContent = `Date published: ${movie.date_published}`;
+            let rated = createNode('p');
+            rated.textContent += `Rated: ${movie.rated}`;
+            let imdb_score = createNode('p');
+            imdb_score.textContent = `Imdb score: ${movie.imdb_score}`;
+            let directors = createNode('p');
+            directors.textContent += `Directors: ${movie.directors}`;
+            let actors = createNode('p');
+            actors.textContent = `Actors: ${movie.actors}`;
+            let duration = createNode('p');
+            duration.textContent += `Duration: ${movie.duration} min`;
+            let countries = createNode('p');
+            countries.textContent += `Countries: ${movie.countries}`;
+            let avg_vote = createNode('p');
+            avg_vote.textContent = `AVG Vote: ${movie.avg_vote}`;
+            let description = createNode('p');
+            description.textContent += `Description: ${movie.description}`;
             append(text, img);
-            append(modale, text_modal);
+            append(text, titre);
+            append(text, genres);
+            append(text, date_published);
+            append(text, rated);
+            append(text, imdb_score);
+            append(text, directors);
+            append(text, actors);
+            append(text, duration);
+            append(text, countries);
+            append(text, avg_vote);
+            append(text, description);
             let span = document.querySelector('.close');
             span.onclick = function () {
                 modale.style.display = "none";
@@ -56,6 +82,7 @@ function createModale(key) {
         });
 }
 for (let [key, value] of categories) {
+
     fetch(value)
         .then((resp) => resp.json())
         .then(function (data) {
@@ -106,15 +133,10 @@ function get_best_film(urlbestfilm) {
             text_modal.textContent = `id:${movies[0].id} `;
             span_modal.className = "close";
             span_modal.textContent += 'X';
-            // span.innerHTML = `id:${ movies[0].id } `;
             append(div, titre);
             append(div, btn);
             append(btn, img);
             append(div, modal);
-
-            console.log(titre);
-            // append(btn, img);
-            // append(div, span);
             append(modal, modal_content);
             append(modal_content, span_modal);
             append(modal_content, text_modal);
@@ -143,161 +165,59 @@ function get_best_film(urlbestfilm) {
 
 el = get_best_film(urlbestfilm);
 
+p_Bests = 0;
+p_Comedy = 0;
+p_History = 0;
+p_Biography = 0;
 
-var p_Bests = 0;
-var p_Comedy = 0;
-var p_History = 0;
-var p_Biography = 0;
 
 window.onload = function () {
-    afficherMasquerBests();
-    afficherMasquerComedy();
-    afficherMasquerHistory();
-    afficherMasquerBiography();
+
+    afficherMasquer('Bests');
+    afficherMasquer('Comedy');
+    afficherMasquer('History');
+    afficherMasquer('Biography');
 }
+// var key = 'Bests;';
+// eval("var p = p_" + key + ";")
+// console.log('P:', p);
+function afficherMasquer(key) {
 
-function afficherMasquer(Bests) {
-    g = document.getElementById(`g_${Bests} `)
-    if (p.concat(Bests) == -3)
-        g.style.visibility = "hidden";
-    else
-        console.log(`p_${Bests} `)
-    g.style.visibility = "visible";
-    d = document.getElementById('d_Bests')
-    if (`p_${Bests} ` == 0)
-        d.style.visibility = "hidden";
-    else
-        d.style.visibility = "visible";
-}
+    eval("var p = p_" + key + ";");
+    eval("var id_g = 'g_" + key + "';");
+    eval("var id_d = 'd_" + key + "';");
 
-
-
-
-
-
-function afficherMasquerBests() {
-    g = document.getElementById('g_Bests')
-    if (p_Bests == -3)
+    g = document.getElementById(id_g);
+    if (p == -3)
         g.style.visibility = "hidden";
     else
         g.style.visibility = "visible";
-    d = document.getElementById('d_Bests')
-    if (p_Bests == 0)
+    d = document.getElementById(id_d)
+    if (p == 0)
         d.style.visibility = "hidden";
     else
         d.style.visibility = "visible";
 }
 
-function afficherMasquerComedy() {
-    g = document.getElementById('g_Comedy')
-    if (p_Comedy == -3)
-        g.style.visibility = "hidden";
-    else
-        g.style.visibility = "visible";
-    d = document.getElementById('d_Comedy')
-    if (p_Comedy == 0)
-        d.style.visibility = "hidden";
-    else
-        d.style.visibility = "visible";
-}
-
-function afficherMasquerHistory() {
-    g = document.getElementById('g_History')
-    if (p_History == -3)
-        g.style.visibility = "hidden";
-    else
-        g.style.visibility = "visible";
-    d = document.getElementById('d_History')
-    if (p_History == 0)
-        d.style.visibility = "hidden";
-    else
-        d.style.visibility = "visible";
-}
-
-function afficherMasquerBiography() {
-    g = document.getElementById('g_Biography')
-    if (p_Biography == -3)
-        g.style.visibility = "hidden";
-    else
-        g.style.visibility = "visible";
-    d = document.getElementById('d_Biography')
-    if (p_Biography == 0)
-        d.style.visibility = "hidden";
-    else
-        d.style.visibility = "visible";
-}
-
-function gauche_Bests() {
-    if (p_Bests > -3)
-        p_Bests--;
-    element = document.getElementById('Bests')
-    element.style.transform = "translate(" + p_Bests * 200 + "px)";
+function gauche(key) {
+    eval("var p = p_" + key + ";");
+    if (p > -3)
+        p--;
+    element = document.getElementById(key)
+    element.style.transform = "translate(" + p * 200 + "px)";
     element.style.transition = "all 0.5s ease";
-    afficherMasquerBests();
+    eval("p_" + key + " = p;");
+    afficherMasquer(key);
 }
 
 
-function droite_Bests() {
-    if (p_Bests < 0)
-        p_Bests++;
-    element = document.getElementById('Bests')
-    element.style.transform = "translate(" + p_Bests * 200 + "px)";
+function droite(key) {
+    eval("var p = p_" + key + ";");
+    if (p < 0)
+        p++;
+    element = document.getElementById(key)
+    element.style.transform = "translate(" + p * 200 + "px)";
     element.style.transition = "all 0.5s ease";
-    afficherMasquerBests();
+    eval("p_" + key + " = p;");
+    afficherMasquer(key);
 }
-
-function gauche_Comedy() {
-    if (p_Comedy > -3)
-        p_Comedy--;
-    element = document.getElementById('Comedy')
-    element.style.transform = "translate(" + p_Comedy * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerComedy();
-}
-
-function droite_Comedy() {
-    if (p_Comedy < 0)
-        p_Comedy++;
-    element = document.getElementById('Comedy')
-    element.style.transform = "translate(" + p_Comedy * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerComedy();
-}
-
-function gauche_History() {
-    if (p_History > -3)
-        p_History--;
-    element = document.getElementById('History')
-    element.style.transform = "translate(" + p_History * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerHistory();
-}
-
-function droite_History() {
-    if (p_History < 0)
-        p_History++;
-    element = document.getElementById('History')
-    element.style.transform = "translate(" + p_History * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerHistory();
-}
-
-function gauche_Biography() {
-    if (p_Biography > -3)
-        p_Biography--;
-    element = document.getElementById('Biography')
-    element.style.transform = "translate(" + p_Biography * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerBiography();
-}
-
-function droite_Biography() {
-    if (p_Biography < 0)
-        p_Biography++;
-    element = document.getElementById('Biography')
-    element.style.transform = "translate(" + p_Biography * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    afficherMasquerBiography();
-}
-
-
