@@ -152,6 +152,10 @@ h1 {
     width: 90%;
 }
 
+.modal img {
+    text-align: center;
+}
+
 /* The Close Button */
 .close {
     color: #aaaaaa;
