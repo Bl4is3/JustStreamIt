@@ -1,17 +1,9 @@
 const url = "http://localhost:8000/api/v1/titles/";
-const urlbestfilm = url + '?sort_by=-imdb_score&page_size=7';
+const urlbestfilm = url + '?sort_by=-imdb_score&page_size=8';
 const urlcomedy = url + "?genre=comedy&sort_by=-imdb_score&page_size=7";
 const urlhistory = url + "?genre=history&sort_by=-imdb_score&page_size=7";
 const urlbiography = url + "?genre=biography&sort_by=-imdb_score&page_size=7";
 
-
-function createNode(element) {
-    return document.createElement(element);
-}
-
-function append(parent, el) {
-    return parent.appendChild(el);
-}
 let categories = new Map();
 
 categories.set('Bests', urlbestfilm);
@@ -19,62 +11,71 @@ categories.set('Comedy', urlcomedy);
 categories.set('History', urlhistory);
 categories.set('Biography', urlbiography);
 
-let promise = fetch("http://localhost:8000/api/v1/titles/574", {
-    method: 'GET'
-});
+function createModale(
+    titre,
+    image_url,
+    genres,
+    date_published,
+    rated,
+    imdb_score,
+    directors,
+    actors,
+    duration,
+    countries,
+    avg_vote,
+    description
+) {
+    document.querySelector(".modal").style.display = "block";
+    document.getElementById('titre').innerHTML += titre;
+    document.getElementById('img_modale').src = image_url;
+    document.getElementById('genres').innerHTML += genres;
+    document.getElementById('date_published').innerHTML += date_published;
+    document.getElementById('rated').innerHTML += rated;
+    document.getElementById('imdb_score').innerHTML += imdb_score;
+    document.getElementById('directors').innerHTML += directors;
+    document.getElementById('actors').innerHTML += actors;
+    document.getElementById('duration').innerHTML += duration;
+    document.getElementById('countries').innerHTML += countries;
+    document.getElementById('avg_vote').innerHTML += avg_vote;
+    document.getElementById('description').innerHTML += description;
+}
 
-function createModale(key) {
+function get_element_film(key, n) {
     url_film = url + key.toString();
-    console.log(url_film);
     return fetch(url_film)
         // interrogation de l'api pour l'id souhaité
         .then((resp) => resp.json())
         .then(function (movie) {
-            let modale = document.querySelector(".modal");
-            let text = document.querySelector('.textArea');
-            let img = createNode('img');
-            img.src = movie.image_url;
-            img.height = "400";
-            img.width = '400';
-            modale.style.display = "block";
-            let titre = createNode('p');
-            titre.textContent = `Title: ${movie.title}`;
-            let genres = createNode('p');
-            genres.textContent += `Genre: ${movie.genres}`;
-            let date_published = createNode('p');
-            date_published.textContent = `Date published: ${movie.date_published}`;
-            let rated = createNode('p');
-            rated.textContent += `Rated: ${movie.rated}`;
-            let imdb_score = createNode('p');
-            imdb_score.textContent = `Imdb score: ${movie.imdb_score}`;
-            let directors = createNode('p');
-            directors.textContent += `Directors: ${movie.directors}`;
-            let actors = createNode('p');
-            actors.textContent = `Actors: ${movie.actors}`;
-            let duration = createNode('p');
-            duration.textContent += `Duration: ${movie.duration} min`;
-            let countries = createNode('p');
-            countries.textContent += `Countries: ${movie.countries}`;
-            let avg_vote = createNode('p');
-            avg_vote.textContent = `AVG Vote: ${movie.avg_vote}`;
-            let description = createNode('p');
-            description.textContent += `Description: ${movie.description}`;
-            append(text, img);
-            append(text, titre);
-            append(text, genres);
-            append(text, date_published);
-            append(text, rated);
-            append(text, imdb_score);
-            append(text, directors);
-            append(text, actors);
-            append(text, duration);
-            append(text, countries);
-            append(text, avg_vote);
-            append(text, description);
-            let span = document.querySelector('.close');
-            span.onclick = function () {
-                modale.style.display = "none";
-                text.innerHTML = ""
+            var image_url = movie.image_url;
+            let titre = movie.title;
+            let genres = movie.genres;
+            let date_published = movie.date_published;
+            let rated = movie.rated;
+            let imdb_score = movie.imdb_score;
+            let directors = movie.directors;
+            let actors = movie.actors;
+            let duration = movie.duration;
+            let countries = movie.countries;
+            let avg_vote = movie.avg_vote;
+            let description = movie.description;
+            if (n == 0) {
+                createModale(titre,
+                    image_url,
+                    genres,
+                    date_published,
+                    rated,
+                    imdb_score,
+                    directors,
+                    actors,
+                    duration,
+                    countries,
+                    avg_vote,
+                    description)
+            }
+            else {
+                document.getElementById('oups').src = movie.image_url;
+                document.getElementById('titre_best').innerHTML = movie.title
+                document.getElementById('resume_best').innerHTML += movie.description
             }
         })
         .catch(function (error) {
@@ -82,24 +83,23 @@ function createModale(key) {
         });
 }
 for (let [key, value] of categories) {
-
+    eval("var p_" + key + "=0;");
+    afficherMasquer(key);
     fetch(value)
         .then((resp) => resp.json())
         .then(function (data) {
             let movies = data.results;
-            console.log('movies', movies)
+            if (key == 'Bests') {
+                document.getElementById('oups').src = movies[0].image_url;
+                get_element_film(movies[0].id, 1);
+                //supression du 1er éléménet du tableau
+                movies.shift();
+            }
             return movies.map(function (movie) {
-                let div = document.getElementById(key);
-                let a = createNode('a');
-                let img = createNode('img');
-                img.src = movie.image_url;
-                img.class = "img-fluid"
-                img.height = "200";
-                img.width = '200';
-                a.href = `javascript: createModale(${movie.id}); `;
-                a.id = `myBtn_${movie.id} `;
-                append(div, a);
-                append(a, img);
+                const elt_href = document.getElementById(key).children;
+                const image = elt_href[movies.indexOf(movie)].children;
+                image[0].src = movie.image_url;
+                elt_href[movies.indexOf(movie)].href = `javascript: get_element_film(${movie.id},0);`;
             })
         })
         .catch(function (error) {
@@ -107,117 +107,127 @@ for (let [key, value] of categories) {
         });
 }
 
-function get_best_film(urlbestfilm) {
-    return fetch(urlbestfilm)
-        .then((resp) => resp.json())
-        .then(function (data) {
-            let movies = data.results;
-            let div = document.getElementById('Best');
-            let titre = createNode('h2');
-            var btn = createNode('button');
-            let img = createNode('img');
-            // let span = createNode('span');
-            var modal = createNode('div');
-            var modal_content = createNode('div');
-            var text_modal = createNode('p')
-            var span_modal = createNode('span');
-            titre.textContent += `${movies[0].title} `;
-            img.src = movies[0].image_url;
-            img.height = "300";
-            img.width = '300';
-            btn.id = `myBtn_${movies[0].id} `;
+// function get_best_film(urlbestfilm) {
+//     // object-fit cover pour affichage
+//     return fetch(urlbestfilm)
+//         .then((resp) => resp.json())
+//         .then(function (data) {
+//             let movies = data.results;
+//             let div = document.getElementById('Best');
+//             let titre = createNode('h2');
+//             var btn = createNode('button');
+//             let img = createNode('img');
+//             // let span = createNode('span');
+//             var modal = createNode('div');
+//             var modal_content = createNode('div');
+//             var text_modal = createNode('p')
+//             var span_modal = createNode('span');
+//             titre.textContent += `${movies[0].title} `;
+//             img.src = movies[0].image_url;
+//             img.height = "300";
+//             img.width = '300';
+//             btn.id = `myBtn_${movies[0].id} `;
 
-            modal.id = `myModal_${movies[0].id} `;
-            modal.className = "modal";
-            modal_content.className = 'modal-content';
-            text_modal.textContent = `id:${movies[0].id} `;
-            span_modal.className = "close";
-            span_modal.textContent += 'X';
-            append(div, titre);
-            append(div, btn);
-            append(btn, img);
-            append(div, modal);
-            append(modal, modal_content);
-            append(modal_content, span_modal);
-            append(modal_content, text_modal);
-            var modal_locale = document.getElementById(`myModal_${movies[0].id} `);
+//             modal.id = `myModal_${movies[0].id} `;
+//             modal.className = "modal";
+//             modal_content.className = 'modal-content';
+//             text_modal.textContent = `id:${movies[0].id} `;
+//             span_modal.className = "close";
+//             span_modal.textContent += 'X';
+//             append(div, titre);
+//             append(div, btn);
+//             append(btn, img);
+//             append(div, modal);
+//             append(modal, modal_content);
+//             append(modal_content, span_modal);
+//             append(modal_content, text_modal);
+//             var modal_locale = document.getElementById(`myModal_${movies[0].id} `);
 
-            var btn_local = document.getElementById(`myBtn_${movies[0].id} `);
+//             var btn_local = document.getElementById(`myBtn_${movies[0].id} `);
 
-            btn_local.onclick = function () {
-                console.log('ca devrait etre Best');
-                modal_locale.style.display = "inline-block";
+//             btn_local.onclick = function () {
+//                 console.log('ca devrait etre Best');
+//                 modal_locale.style.display = "inline-block";
 
-            }
-            span_modal.onclick = function () {
-                modal_locale.style.display = "none";
-            }
-            window.onclick = function (event) {
-                if (event.target == modal_locale) {
-                    modal_locale.style.display = "none";
-                }
-            }
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-}
+//             }
+//             span_modal.onclick = function () {
+//                 modal_locale.style.display = "none";
+//             }
+//             window.onclick = function (event) {
+//                 if (event.target == modal_locale) {
+//                     modal_locale.style.display = "none";
+//                 }
+//             }
+//         })
+//         .catch(function (error) {
+//             console.log(error);
+//         });
+// }
 
-el = get_best_film(urlbestfilm);
-
-p_Bests = 0;
-p_Comedy = 0;
-p_History = 0;
-p_Biography = 0;
+// el = get_best_film(urlbestfilm);
 
 
-window.onload = function () {
+const span = document.querySelector('.close');
+span.addEventListener('click', function () {
+    modale = document.querySelector('.modal');
+    modale.style.display = "none";
+    document.getElementById('titre').innerHTML = "Titre: ";
+    document.getElementById('img_modale').src = "";
+    document.getElementById('genres').innerHTML = "genres: ";
+    document.getElementById('date_published').innerHTML = "date_published: ";
+    document.getElementById('rated').innerHTML = "rated: ";
+    document.getElementById('imdb_score').innerHTML = "imdb_score: ";
+    document.getElementById('directors').innerHTML = "directors: ";
+    document.getElementById('actors').innerHTML = "actors: ";
+    document.getElementById('duration').innerHTML = "duration: ";
+    document.getElementById('countries').innerHTML = "countries: ";
+    document.getElementById('avg_vote').innerHTML = "avg_vote: ";
+    document.getElementById('description').innerHTML = "description: ";
 
-    afficherMasquer('Bests');
-    afficherMasquer('Comedy');
-    afficherMasquer('History');
-    afficherMasquer('Biography');
-}
-// var key = 'Bests;';
-// eval("var p = p_" + key + ";")
-// console.log('P:', p);
+});
+
+const elts_left = document.querySelectorAll('.btn-left');
+elts_left.forEach(function (elt_left) {
+    elt_left.addEventListener('click', function () {
+        key = elt_left.previousElementSibling.childNodes[1].id;
+        eval("var p = p_" + key + ";");
+        if (p > -3)
+            p--;
+        element = document.getElementById(key)
+        element.style.transform = "translate(" + p * 200 + "px)";
+        element.style.transition = "all 0.5s ease";
+        eval("p_" + key + " = p;");
+        afficherMasquer(key);
+    });
+});
+
+const elts_right = document.querySelectorAll('.btn-right');
+elts_right.forEach(function (elt_right) {
+    elt_right.addEventListener('click', function () {
+        key = elt_right.previousElementSibling.previousElementSibling.childNodes[1].id;
+        eval("var p = p_" + key + ";");
+        if (p < 0)
+            p++;
+        element = document.getElementById(key)
+        element.style.transform = "translate(" + p * 200 + "px)";
+        element.style.transition = "all 0.5s ease";
+        eval("p_" + key + " = p;");
+        afficherMasquer(key);
+    });
+});
+
 function afficherMasquer(key) {
-
+    diva = document.getElementById(key).parentElement.parentElement;
     eval("var p = p_" + key + ";");
-    eval("var id_g = 'g_" + key + "';");
-    eval("var id_d = 'd_" + key + "';");
-
-    g = document.getElementById(id_g);
+    g = diva.querySelector(' .btn-left');
     if (p == -3)
         g.style.visibility = "hidden";
     else
         g.style.visibility = "visible";
-    d = document.getElementById(id_d)
+    d = diva.querySelector('.btn-right');
     if (p == 0)
         d.style.visibility = "hidden";
     else
         d.style.visibility = "visible";
-}
 
-function gauche(key) {
-    eval("var p = p_" + key + ";");
-    if (p > -3)
-        p--;
-    element = document.getElementById(key)
-    element.style.transform = "translate(" + p * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    eval("p_" + key + " = p;");
-    afficherMasquer(key);
-}
-
-
-function droite(key) {
-    eval("var p = p_" + key + ";");
-    if (p < 0)
-        p++;
-    element = document.getElementById(key)
-    element.style.transform = "translate(" + p * 200 + "px)";
-    element.style.transition = "all 0.5s ease";
-    eval("p_" + key + " = p;");
-    afficherMasquer(key);
 }

@@ -8,7 +8,7 @@ h1 {
 
 .container1 {
     display: inline-block;
-    width: 1000px;
+    width: 80%;
     height: 200px;
     position: relative;
 }
@@ -16,64 +16,140 @@ h1 {
 .container {
     margin-bottom: 50px;
     text-align: center;
+    width: 100%;
 }
 
-.nav {
+.navbar {
+    height: 50px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
     padding-right: 6rem;
-    text-align: left;
+    justify-content: left;
 }
 
-.nav__link {
-    display: inline;
-    font-size: 3rem;
-    padding-left: 1.5rem;
+.navbar ul {
+    justify-content: left;
 }
 
-.nav__link a {
+.navbar li {
+    height: auto;
+    width: 135.8px;
+    float: left;
+    text-align: center;
+    list-style: none;
+    font: normal bold 13px/1em Arial, Verdana, Helvetica;
+    padding: 0;
+    margin: 0;
+    background-color: #444444;
+
+    justify-content: left;
+}
+
+.navbar a {
+    padding: 18px 0;
+    border-left: 1px solid #ccc9c9;
     text-decoration: none;
-    color: #D6FFF5;
+    color: white;
+    display: block;
 }
 
-.nav__link--active {
-    color: #001534;
+.navbar li:hover,
+a:hover {
+    background-color: #444444;
 }
 
-.nav__link a:hover {
-    color: #fff;
+.navbar li ul {
+    display: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
 }
+
+.navbar li:hover ul {
+    display: block;
+}
+
+.navbar li ul li {
+    background-color: #444444;
+}
+
+.navbar li ul li a {
+    border-left: 1px solid #444444;
+    border-right: 1px solid #444444;
+    border-top: 1px solid #c9d4d8;
+    border-bottom: 1px solid #444444;
+}
+
+.navbar li ul li a:hover {
+    background-color: #a3a1a1;
+}
+
+
 
 .header {
-    background-color: rgb(131, 128, 128);
+    background-color: #444444;
+    text-align: right;
+    width: 100%;
+    height: 52px;
+    margin: 0;
+    z-index: 99;
+    position: relative;
+}
+
+.header__logo {
+    margin-left: 75%;
+    vertical-align: center;
+    position: absolute;
 }
 
 #Best {
     margin-top: 20px;
+    margin-bottom: 100px;
+    width: 1000px;
+    height: 300px;
+
 }
 
 #Bests,
 #Comedy,
 #History,
 #Biography {
-    display: block;
-    width: 1400px;
-    height: 200px;
+    margin-left: -12%;
+    display: inline-block;
+    width: 200%;
+    height: 100%;
     position: relative;
 }
 
 #carrousel {
     display: block;
-    width: 1000px;
-    height: 200px;
+    width: 80%;
+    height: 100%;
     position: relative;
+    text-align: center;
+
 }
 
-#films {
-    margin-left: 100px;
-    width: 800px;
-    height: 200px;
+.films {
+    margin-left: 10%;
+    width: 80%;
+    height: 100%;
     overflow: hidden;
     border: solid 2px #000;
+    text-align: center;
 
+}
+
+.img {
+    width: 200px;
+    height: 200px;
+}
+
+#img_modale {
+    width: 400px;
+    height: 400px;
 }
 
 .button {
@@ -82,86 +158,65 @@ h1 {
     position: absolute;
     cursor: pointer;
     top: 60px;
-    right: 0x;
+    right: 0;
 }
 
-#g_Bests,
-#g_Comedy,
-#g_History,
-#g_Biography {
+.btn-left {
     left: 0;
     opacity: 0.3;
     transform: rotate(180deg);
     transition: all
 }
 
-#d_Bests,
-#d_Comedy,
-#d_History,
-#d_Biography {
+.btn-right {
     right: 0;
     opacity: 0.3;
     transform: rotate(0deg);
 }
 
-#g_Bests:hover,
-#g_Comedy:hover,
-#g_History:hover,
-#g_Biography:hover {
+.btn-left:hover {
     transform: rotate(180deg) scale(1.1);
     opacity: 0.6;
 }
 
-#d_Bests:hover,
-#d_Comedy:hover,
-#d_History:hover,
-#d_Biography:hover {
+.btn-right:hover {
     transform: rotate(0deg) scale(1.1);
     opacity: 0.6;
 }
 
 .modal {
     display: none;
-    /* Hidden by default */
     position: fixed;
-    /* Stay in place */
     z-index: 1;
-    /* Sit on top */
     padding-top: 10px;
-    /* Location of the box */
     left: 15%;
     top: 15%;
     width: 70%;
-    /* Full width */
     height: 80%;
-    /* Full height */
     overflow: hidden;
-    /* Enable scroll if needed */
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0);
-    /* Black w/ opacity */
+    overflow-y: auto;
 }
 
-/* Modal Content */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
-    width: 90%;
+    width: 95%;
 }
 
 .modal img {
     text-align: center;
 }
 
-/* The Close Button */
 .close {
     color: #aaaaaa;
-    font-size: 28px;
+    font-size: 1.5em;
     font-weight: bold;
     text-align: right;
+    vertical-align: top;
     margin-top: 0;
 
 }
@@ -171,4 +226,8 @@ h1 {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+#oups {
+    object-fit: cover;
 }

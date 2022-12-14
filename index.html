@@ -13,118 +13,144 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-
 </head>
 
 <body>
     <div class="modal">
         <div class="modal-content">
             <span class="close">x</span>
+
             <div class="textArea">
+                <img src="chargement.gif" alt="Best Film" id="img_modale">
+                <p id="titre">Titre: </p>
+                <p id="genres">genres: </p>
+                <p id="date_published">date_published: </p>
+                <p id="rated">rated: </p>
+                <p id="imdb_score">imdb_score: </p>
+                <p id="directors">directors: </p>
+                <p id="actors">actors: </p>
+                <p id="duration">duration: </p>
+                <p id="countries">countries: </p>
+                <p id="avg_vote">avg_vote: </p>
+                <p id="description">description: </p>
             </div>
         </div>
     </div>
     <div class='container'>
         <div class='container en-tete'>
             <header class="header">
-                <nav class="navbar navbar-expand-lg ">
-                    <div class="container-fluid">
-                        <a class="navbar-brand" href="#">Just Stream It</a>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-                            aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarNav">
-                            <ul class="navbar-nav">
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        Catégories
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#Bests">Bests</a></li>
-                                        <li><a class="dropdown-item" href="#Comedy">Comedy</a></li>
-                                        <li><a class="dropdown-item" href="#History">History</a></li>
-                                        <li><a class="dropdown-item" href="#Biography">Biography</a></li>
-                                    </ul>
-                                </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Contact</a>
-                                </li>
+                <nav class="navbar">
+                    <h1 class="header__logo">
+                        Just Stream It
+                    </h1>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li> <a href="#">Catégories</a>
+                            <ul>
+                                <li><a href="#Bests">Bests</a></li>
+                                <li><a href="#Comedy">Comedy</a></li>
+                                <li><a href="#History">History</a></li>
+                                <li><a href="#Biography">Biography</a></li>
                             </ul>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                 </nav>
             </header>
-        </div>
 
+        </div>
         <div class='container'>
             <div class='container'>
                 <div class='container' id="Best">
-
+                    <img src="chargement.gif" alt="ImageBest" class=" best" id="oups">
+                    <p id="titre_best">Titre: </p>
+                    <p id="resume_best">Résumé: </p>
+                    <button type="submit">Play</button>
                 </div>
             </div>
             <div class=' container'>
-                <h1>Films les mieux notés</h1>
+                <h1>Bests Films</h1>
                 <div class="container1">
-                    <div id="carrousel">
-                        <div id='films'>
-                            <div id="Bests">
+                    <div class="carrousel">
+                        <div class='films'>
+                            <div id="Bests" class="1">
+                                <a href="a"><img src="chargement.gif" alt="Image1" class="img" id="1"></a>
+                                <a href="b"><img src="chargement.gif" alt="Image2" class="img " id="2"></a>
+                                <a href="c"><img src="chargement.gif" alt="Image3" class="img " id="3"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image4" class="img " id="4"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image5" class="img " id="5"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image6" class="img " id="6"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image7" class="img " id="7"></a>
                             </div>
                         </div>
-                        <img src="bouton_fleche.png" class=" button" id="g_Bests" onclick="gauche('Bests')" />
-                        <img src="bouton_fleche.png" class=" button" id="d_Bests" onclick="droite('Bests')" />
+                        <img src="bouton_fleche.png" alt="Bouton Gauche" class="button btn-left">
+                        <img src="bouton_fleche.png" alt="Bouton Droit" class="button btn-right">
                     </div>
                 </div>
             </div>
             <div class='container'>
-                <h1>Meilleurs Films Comédies</h1>
+                <h1>Bests Comedies</h1>
                 <div class="container1">
-                    <div id="carroussel">
-                        <div id='films'>
+                    <div class="carroussel">
+                        <div class='films'>
                             <div id="Comedy">
+                                <a href="#"><img src="chargement.gif" alt="Image1" class="img img1"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image2" class="img img2"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image3" class="img img3"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image4" class="img img4"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image5" class="img img5"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image6" class="img img6"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image7" class="img img7"></a>
                             </div>
                         </div>
-                        <img src="bouton_fleche.png" class=" button" id="g_Comedy" onclick="gauche('Comedy')" />
-                        <img src="bouton_fleche.png" class=" button" id="d_Comedy" onclick="droite('Comedy')" />
+                        <img src="bouton_fleche.png" alt="Bouton Gauche" class="button btn-left">
+                        <img src="bouton_fleche.png" alt="Bouton Droit" class="button btn-right">
                     </div>
                 </div>
             </div>
             <div class='container'>
-                <h1>Meilleurs Films Historiques</h1>
+                <h1>Bests Histories</h1>
                 <div class="container1">
-                    <div id="carrousel">
-                        <div id='films'>
+                    <div class="carrousel">
+                        <div class='films'>
                             <div id="History">
+                                <a href="#"><img src="chargement.gif" alt="Image1" class="img img1"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image2" class="img img2"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image3" class="img img3"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image4" class="img img4"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image5" class="img img5"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image6" class="img img6"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image7" class="img img7"></a>
                             </div>
                         </div>
-                        <img src="bouton_fleche.png" class=" button" id="g_History" onclick="gauche('History')" />
-                        <img src="bouton_fleche.png" class=" button" id="d_History" onclick="droite('History')" />
+                        <img src="bouton_fleche.png" alt="Bouton Gauche" class="button btn-left">
+                        <img src="bouton_fleche.png" alt="Bouton Droit" class="button btn-right">
                     </div>
                 </div>
             </div>
             <div class='container'>
-                <h1>Meilleurs Films Biographiques</h1>
+                <h1>Bests Biographies</h1>
                 <div class="container1">
-                    <div id="carrousel">
-                        <div id='films'>
+                    <div class="carrousel">
+                        <div class='films'>
                             <div id="Biography">
+                                <a href="#"><img src="chargement.gif" alt="Image1" class="img img1"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image2" class="img img2"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image3" class="img img3"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image4" class="img img4"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image5" class="img img5"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image6" class="img img6"></a>
+                                <a href="#"><img src="chargement.gif" alt="Image7" class="img img7"></a>
                             </div>
                         </div>
-                        <img src="bouton_fleche.png" class=" button" id="g_Biography" onclick="gauche('Biography')" />
-                        <img src="bouton_fleche.png" class=" button" id="d_Biography" onclick="droite('Biography')" />
+                        <img src="bouton_fleche.png" alt="Bouton Gauche" class=" button btn-left">
+                        <img src="bouton_fleche.png" alt="Bouton Droit" class=" button btn-right">
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="just.js"></script>
 </body>
-<script src="just.js"></script>
 
 </html>
