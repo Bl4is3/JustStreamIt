@@ -147,6 +147,10 @@ a:hover {
     height: 200px;
 }
 
+.img:hover {
+    cursor: pointer;
+}
+
 #img_modale {
     width: 400px;
     height: 400px;
