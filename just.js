@@ -26,18 +26,18 @@ function createModale(
     description
 ) {
     document.querySelector(".modal").style.display = "block";
-    document.getElementById('titre').innerHTML += titre;
+    document.getElementById('titre').innerHTML = 'Titre: ' + titre;
     document.getElementById('img_modale').src = image_url;
     document.getElementById('genres').innerHTML = 'Genre: ' + genres;
-    document.getElementById('date_published').innerHTML += date_published;
-    document.getElementById('rated').innerHTML += rated;
-    document.getElementById('imdb_score').innerHTML += imdb_score;
-    document.getElementById('directors').innerHTML += directors;
-    document.getElementById('actors').innerHTML += actors;
-    document.getElementById('duration').innerHTML += duration;
-    document.getElementById('countries').innerHTML += countries;
-    document.getElementById('avg_vote').innerHTML += avg_vote;
-    document.getElementById('description').innerHTML += description;
+    document.getElementById('date_published').innerHTML = 'Date de publication: ' + date_published;
+    document.getElementById('rated').innerHTML = 'Rated: ' + rated;
+    document.getElementById('imdb_score').innerHTML = 'Imdb_score: ' + imdb_score;
+    document.getElementById('directors').innerHTML = 'Réalisateur: ' + directors;
+    document.getElementById('actors').innerHTML = 'Acteurs: ' + actors;
+    document.getElementById('duration').innerHTML = 'Durée: ' + duration;
+    document.getElementById('countries').innerHTML = 'Pays: ' + countries;
+    document.getElementById('avg_vote').innerHTML = 'AVG_Votes: ' + avg_vote;
+    document.getElementById('description').innerHTML = 'Description' + description;
 }
 
 function get_element_film(key, modale_creation = true) {
@@ -156,15 +156,15 @@ images_cliquable.forEach(function (image_cliquable) {
 function afficherMasquer(key) {
     diva = document.getElementById(key).parentElement.parentElement;
     eval("var position = position_" + key + ";");
-    g = diva.querySelector(' .btn-left');
+    gauche = diva.querySelector(' .btn-left');
     if (position == -3)
-        g.style.visibility = "hidden";
+        gauche.style.visibility = "hidden";
     else
-        g.style.visibility = "visible";
-    d = diva.querySelector('.btn-right');
+        gauche.style.visibility = "visible";
+    droite = diva.querySelector('.btn-right');
     if (position == 0)
-        d.style.visibility = "hidden";
+        droite.style.visibility = "hidden";
     else
-        d.style.visibility = "visible";
+        droite.style.visibility = "visible";
 
 }
