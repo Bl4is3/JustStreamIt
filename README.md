@@ -1,4 +1,4 @@
-### Interface pour l'application JustStreamIt
+# Interface pour l'application JustStreamIt
 
 Interface pour l'application JustStreamIt qui permet l'affichage de données sur des films 
 récupérés via une api.
@@ -36,6 +36,6 @@ Déammrer l'api en locale:
 python manage.py runserver
 ```
 
-## Initialisation du programme:
+## Utilisation du programme:
 
 Doucle-cliquez sur le fichier index.html.
