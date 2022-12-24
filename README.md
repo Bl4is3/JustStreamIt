@@ -23,17 +23,18 @@ source env/bin/activate
 
 Importez l'api du projet depuis github:
 
-'''
+```
 git clone https://github.com/GuillaumeP29/OC_P6.git
-'''
+```
+
 
 Suivez le procédure d'installation de l'api fournie.
 
 Déammrer l'api en locale:
 
-'''
+```
 python manage.py runserver
-'''
+```
 
 ## Initialisation du programme:
 
